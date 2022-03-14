@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Ebooks.Areas.Admin.Models.Book>
+@{
+    ViewBag.Title = "ListBook";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3" style="display:flex; justify-content:space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Số Lượng Sách</h6>
+        <a href="@Url.Action("Create", "Book")" class="btn btn-primary btn-icon-split" style="float:right;">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Thêm sách mới</span>
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <colgroup>
+                    <col width="5%">
+                    <col width="15%">
+                    <col width="30%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="15%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Ảnh</th>
+                        <th class="text-center">Chi tiết</th>
+                        <th class="text-center">Thể loại</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Giá</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>
+                            <div class="d-flex w-100 jus-cont-center">
+                                <div class="img-field img-thumbnail rounded">
+                                    <img src="@item.image_path" alt="Alternate Text" class="img-fluid rounded"/>      
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: unset;">
+                            <p>Tên: @item.title</p>
+                            <p><small>Tác giả: @item.author</small></p>
+                            <p><small>Mô tả: <span class="truncate">@item.description</span></small></p>
+                        </td>
+                        <td><p>@item.category.name</p></td>
+                        <td><p>@item.qty</p></td>
+                        <td><p>@item.price</p></td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Book", new { id = item.id })" class="btn btn-info btn-icon-split">
+                                <span class="icon text-gray-300">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                            </a>
+                            <a href="@Url.Action("Delete", "Book", new { id = item.id })" class="btn btn-danger btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                                <span class="text">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

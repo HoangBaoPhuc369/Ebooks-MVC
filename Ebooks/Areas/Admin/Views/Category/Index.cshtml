@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Ebooks.Areas.Admin.Models.category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3" style="display:flex; justify-content:space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Số Lượng Danh Mục</h6>
+    <a href="@Url.Action("Create", "Category")" class="btn btn-primary btn-icon-split" style="float:right;">
+        <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+        </span>
+        <span class="text">Thêm mới danh mục</span>
+    </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã danh mục</th>
+                        <th>Tên danh mục</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id</td>
+                            <td>@item.name</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Category", new { id = item.id })" class="btn btn-info btn-icon-split">
+                                    <span class="icon text-gray-300">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                </a>
+                                <a href="@Url.Action("Delete", "Category", new { id = item.id })" class="btn btn-danger btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    <span class="text">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
