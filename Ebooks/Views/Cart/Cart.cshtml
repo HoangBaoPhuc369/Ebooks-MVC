@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Ebooks.Models.Cart>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Giohang</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.author)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.image)" width="180" alt="Alternate Text" />
+                </td>
+                @using (Html.BeginForm("UpdateCart", "Cart", new { @id = item.book_id }))
+                {
+                    <td>@String.Format("{0:0,0}", item.price) VND</td>
+                    <td><input type="number" name="txtSoLg" min="1" value="@item.qty" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.total)</td>
+                    <td>
+                        <a href="@Url.Action("Detail", "Books", new {id = item.book_id })">Chi tiết</a> | @Html.ActionLink("Xóa", "DeleteCart", new { @id = item.book_id })
+                    </td>
+                    <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
+                }
+
+            </tr>
+        }*@
+
+@*<tr style="font-weight:bold; text-align:left; color:red">
+            <td colspan="2">Số loại sách: @ViewBag.TotalBook</td>
+            <td colspan="2">Số lượng sách: @ViewBag.TotalQty</td>
+            <td colspan="4">Tổng tiền: @String.Format("{0:0,0}", @ViewBag.TotalPrice) VND</td>
+        </tr>
+
+        <tr style="font-weight:bold; text-align:right; color:blue">
+            <td colspan="5">@Html.ActionLink("Xóa giỏ hàng", "DeleteAllCart")</td>
+        </tr>
+
+        <tr style="font-weight:bold; text-align:right; color:yellow">
+            <td colspan="5">@Html.ActionLink("Đặt hàng", "Dathang", "GioHang")</td>
+        </tr>
+
+    </table>*@
+<div class="main-field__cart">
+    <div class="cart__bill--header" id="header__cart">
+        <div class="cart__bill-left">
+            <p>Sản phẩm</p>
+        </div>
+        <div class="cart__bill-right">
+            <div class="grid">
+                <div class="row">
+                    <div class="l-3">
+                        <p class="unit-cart">Đơn giá</p>
+                    </div>
+                    <div class="l-3">
+                        <p class="amount-cart">Số lượng</p>
+                    </div>
+                    <div class="l-3">
+                        <p class="amount_of_price">Số tiền</p>
+                    </div>
+                    <div class="l-3">
+                        <p class="operation-cart">Thao tác</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart__list-product">
+        <ul class="list-group grid">
+            @foreach (var item in Model)
+            {
+                <li class="list-group__product--item" data-id="" data-price="">
+                    <div class="cart__bill-left">
+                        <a class="" href="@Url.Action("Detail", "Books", new {id = item.book_id })">
+                            <img src="@Html.DisplayFor(modelItem => item.image)" alt="" class="img-fluid">
+                        </a>
+
+                        <a class="detail-field" href="@Url.Action("Detail", "Books", new {id = item.book_id })">
+                            <p class="book-name">Sách: @Html.DisplayFor(modelItem => item.name)</p>
+                            <p class="book-author">Tác giả:  @Html.DisplayFor(modelItem => item.author)</p>
+                        </a>
+
+                        <div class="cart__product-main-classify">
+                            <div class="book-category">Thể loại sách: </div>
+                            <div class="book-cate-name">@Html.DisplayFor(modelItem => item.category_name)</div>
+                        </div>
+                    </div>
+
+                    <div class="cart__bill-right">
+                        <div class="grid">
+                            <div class="row">
+                                <div class="l-3">
+                                    <span class="product__unit-price">@String.Format("{0:0,0}", item.price)đ</span>
+                                </div>
+                                <div class="l-3">
+                                    <div class="d-flex product__amount-main">
+                                        <span class="product__amount-main-minus btn-minus">
+                                            <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+                                        </span>
+                                        <input min="1" name="txtSoLg" id="" class="product__amount-main-input-content form-control-sm qty-input" value="@item.qty">
+                                        <span class="product__amount-main-plus btn-plus"><b><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b></span>
+                                    </div>
+                                </div>
+                                <div class="l-3">
+                                    <div class="amount-field">
+                                        <span class="amount">@String.Format("{0:0,0}", @Html.DisplayFor(modelItem => item.total))</span>
+                                        <span>đ</span>
+                                    </div>
+                                </div>
+                                <div class="l-3">
+                                    <span class="float-right">
+                                        <button class="btn-t-2 btn-sm btn-outline-danger rem_item mg-bot-5" onclick="location.href='@Url.Action("DeleteCart", "Cart", new { @id = item.book_id })';" type="button" data-id="">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+        <div class="cart__product-pay-total" id="total__product--price">
+            <div class="cart__bill-left"></div>
+            <div class="cart__bill-right">
+
+                <div class="cart__product-pay-total-right-all">Tổng Thanh Toán: </div>
+
+                <div class="cart__product-pay-total-right-price">
+                    <h4 class="text-right" id="tamount">@String.Format("{0:0,0}", @ViewBag.TotalPrice)</h4>
+                    <span>đ</span>
+                </div>
+
+                <button class="btn product-btn-buy" id="checkout" type="button">Mua Hàng</button>
+
+            </div>
+        </div>
+    </div>
+</div>

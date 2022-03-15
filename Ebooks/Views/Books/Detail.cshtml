@@ -1,4 +1,4 @@
-﻿@model Ebooks.Areas.Admin.Models.Book
+﻿@model Ebooks.Models.Book
 
 @{
     ViewBag.Title = "Detail";
@@ -54,7 +54,7 @@
                 <div class="d-flex jusctify-content-center product-btn">
                     <div class="product-btn-cart">
                         <div class="product-btn-cart-content">
-                            <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="button" id="add_to_cart">
+                            <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="button" id="add_to_cart" onclick="location.href='@Url.Action("Add2Cart", "Cart", new { @id = Model.id, @strURL = Request.Url.ToString() })';">
                                 <div class="product-btn-cart-main">
                                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          viewBox="0 0 511.976 511.976" style="enable-background:new 0 0 511.976 511.976;" xml:space="preserve">
@@ -147,3 +147,4 @@
         </div>
     </div>
 </div>
+
