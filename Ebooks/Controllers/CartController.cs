@@ -87,6 +87,9 @@ namespace Ebooks.Controllers
 
         public ActionResult CartPartial()
         {
+            List<Cart> lstItem = GetCarts();
+            ViewBag.IsCart = lstItem.Count();
+            ViewBag.lstItem = lstItem;
             ViewBag.TotalQty = TotalQty();
             ViewBag.TotalPrice = TotalPrice();
             ViewBag.TotalBook = TotalBook();
@@ -103,6 +106,18 @@ namespace Ebooks.Controllers
                 return RedirectToAction("Cart");
             }
             return RedirectToAction("Cart");
+        }
+
+        public ActionResult DeleteCartInIcon(int id)
+        {
+            List<Cart> lstGiohang = GetCarts();
+            Cart sanpham = lstGiohang.SingleOrDefault(n => n.book_id == id);
+            if (sanpham != null)
+            {
+                lstGiohang.RemoveAll(n => n.book_id == id);
+                return RedirectToAction("Detail", "Books");
+            }
+            return RedirectToAction("Detail", "Books");
         }
 
         public ActionResult UpdateCart(int id, FormCollection collection)

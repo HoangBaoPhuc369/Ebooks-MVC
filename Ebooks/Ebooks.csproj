@@ -205,6 +205,7 @@
     <Content Include="Asset\admin\css\sb-admin-2.css" />
     <Content Include="Asset\admin\css\sb-admin-2.min.css" />
     <Content Include="Asset\client\assets\css\base.css" />
+    <Content Include="Asset\client\assets\img\cart.png" />
     <Content Include="Content\grid.css" />
     <Content Include="Asset\client\assets\css\main.css" />
     <Content Include="Asset\client\assets\css\responsive.css" />
@@ -3868,6 +3869,7 @@
     <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Books\Detail.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
