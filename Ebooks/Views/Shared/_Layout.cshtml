@@ -25,13 +25,13 @@
                         <li class="header__navbar-item header__navbar-item--has-QR header__navbar-item--separate">
                             Vào cửa hàng trên ứng dụng TickID
                             <div class="header__QR">
-                                <img src="./assets/img/QR_Code.png" alt="QR Code" class="header__QR-img">
+                                <img src="~/Asset/client/assets/img/QR_Code.png" alt="QR Code" class="header__QR-img">
                                 <div class="header__QR-apps">
                                     <a href="" class="header__QR-link">
-                                        <img src="./assets/img/Google_Play.png" alt="Google_Play" class="header__QR-download-img">
+                                        <img src="~/Asset/client/assets/img/Google_Play.png" alt="Google_Play" class="header__QR-download-img">
                                     </a>
                                     <a href="" class="header__QR-link">
-                                        <img src="./assets/img/App_Store.png" alt="App_Store" class="header__QR-download-img">
+                                        <img src="~/Asset/client/assets/img/App_Store.png" alt="App_Store" class="header__QR-download-img">
                                     </a>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@
 
                     <div class="header__cart">
                         @Html.Action("CartPartial", "Cart")
-                       
+
                     </div>
                 </div>
             </div>
@@ -206,6 +206,9 @@
                 </li>
             </ul>
         </header>
+
+
+
 
         <div class="app__container">
             <div class="grid wide">
@@ -291,10 +294,10 @@
                     <div class="col l-2-4 m-8 c-12">
                         <h3 class="footer__heading">Vào cửa hành trên ứng dụng TickID</h3>
                         <div class="footer__dowload">
-                            <img src="./assets/img/QR_Code.png" alt="QR CODE" class="footer__dowload-qr">
+                            <img src="~/Asset/client//assets/img/QR_Code.png" alt="QR CODE" class="footer__dowload-qr">
                             <div class="footer__dowload-apps">
                                 <a href="" class="footer__dowload-apps-link">
-                                    <img src="./assets/img/Google_Play.png" alt="Google Play" class="footer__dowload-apps--img">
+                                    <img src="~/Asset/client/assets/img/Google_Play.png" alt="Google Play" class="footer__dowload-apps--img">
                                 </a>
                                 <a href="" class="footer__dowload-apps-link">
                                     <img src="~/Asset/client/assets/img/App_Store.png" alt="App Store" class="footer__dowload-apps--img">
@@ -428,5 +431,7 @@
     </div> -->
     <!-- </div>
     </div> -->
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("script", required: false)
 </body>
 </html>

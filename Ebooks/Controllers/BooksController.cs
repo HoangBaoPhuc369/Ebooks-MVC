@@ -21,6 +21,11 @@ namespace Ebooks.Models
             return View(all_sach.ToPagedList(pageNum, pageSize));
         }
 
+        public ActionResult Header()
+        {
+            return View(); ;
+        }
+
         public ActionResult Detail(int id)
         {
             var D_sach = data.Books.Where(m => m.id == id).First();

@@ -34,7 +34,7 @@
 
                                 <div class="header__cart-item-body">
                                     <span class="header__cart-item-description">Thể loại: @item.category_name</span>
-                                    <a href="@Url.Action("DeleteCartInIcon", "Cart", new { @id = item.book_id })" class="header__cart-item-remove">Xóa</a>
+                                    <a href='@Url.Action("DeleteCartInIcon", "Cart", new { @id = item.book_id, @strURL = HttpContext.Current.Request.RawUrl.ToString()})' class="header__cart-item-remove cart_item">Xóa</a>
                                 </div>
                             </div>
                         </li>
@@ -61,3 +61,4 @@
     </div>
 
 </div>
+

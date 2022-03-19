@@ -877,7 +877,7 @@
 /* Header sort bar */
 .header__sort-bar {
     position: fixed;
-    top: var(--header-height);
+    top: 120px;
     right: 0;
     left: 0;
     margin: 0;

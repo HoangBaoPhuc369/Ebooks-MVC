@@ -365,3 +365,43 @@ input, button, select, optgroup, textarea {
 .d-block {
     display: block !important;
 }
+
+.copper__character {
+    font-size: 12px;
+    color: var(--primary-color);
+}
+
+.form-cart_change--qty {
+    width: 100%;
+    display: flex;
+}
+
+.format-btn {
+    background: none;
+    border: none;
+    padding: 2px 13px;
+}
+
+.product__amount-main-minus {
+    position: relative;
+}
+
+.fa-minus {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 77px;
+    right: 425px;
+}
+
+.product__amount-main-plus {
+    position: relative;
+}
+
+.fa-plus {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 76px;
+    right: 344px;
+}

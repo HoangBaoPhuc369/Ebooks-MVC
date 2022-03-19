@@ -3870,6 +3870,7 @@
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Books\Detail.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Books\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

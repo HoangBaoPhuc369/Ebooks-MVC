@@ -23,20 +23,20 @@ namespace Ebooks.Controllers
             }
             return lstGiohang;
         }
-
-        public ActionResult Add2Cart(int id, string strUrl)
+        public ActionResult Add2Cart(int id, string strUrl, FormCollection collection)
         {
             List<Cart> lstGiohang = GetCarts();
             Cart sanpham = lstGiohang.Find(n => n.book_id == id);
             if (sanpham == null)
             {
                 sanpham = new Cart(id);
+                sanpham.qty = int.Parse(collection["txtSoLg"].ToString());
                 lstGiohang.Add(sanpham);
                 return Redirect(strUrl);
             }
             else
             {
-                sanpham.qty++;
+                sanpham.qty = sanpham.qty + int.Parse(collection["txtSoLg"].ToString());
                 return Redirect(strUrl);
             }
         }
@@ -108,16 +108,16 @@ namespace Ebooks.Controllers
             return RedirectToAction("Cart");
         }
 
-        public ActionResult DeleteCartInIcon(int id)
+        public ActionResult DeleteCartInIcon(int id, string strUrl)
         {
             List<Cart> lstGiohang = GetCarts();
             Cart sanpham = lstGiohang.SingleOrDefault(n => n.book_id == id);
             if (sanpham != null)
             {
                 lstGiohang.RemoveAll(n => n.book_id == id);
-                return RedirectToAction("Detail", "Books");
+                return Redirect(strUrl);
             }
-            return RedirectToAction("Detail", "Books");
+            return Redirect(strUrl);
         }
 
         public ActionResult UpdateCart(int id, FormCollection collection)
