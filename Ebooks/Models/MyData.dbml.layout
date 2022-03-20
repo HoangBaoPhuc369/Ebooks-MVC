@@ -21,5 +21,11 @@
         <classShapeMoniker Id="12ff2f53-619b-4c11-8d32-2cbdd6f35e17" />
       </nodes>
     </associationConnector>
+    <classShape Id="0df45b41-eae8-4bdd-bd61-56d63eb6daa7" absoluteBounds="7.75, 2.375, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/MyDataDataContext/customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="accc632c-e1de-4534-8471-f7d4323b1dfc" absoluteBounds="7.7650000000000006, 2.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
