@@ -207,6 +207,8 @@
     <Content Include="Asset\admin\css\sb-admin-2.min.css" />
     <Content Include="Asset\client\assets\css\base.css" />
     <Content Include="Asset\client\assets\img\cart.png" />
+    <Content Include="Asset\client\cart checkout\cart.css" />
+    <Content Include="Asset\client\cart checkout\cart1 checkout.html" />
     <Content Include="Content\grid.css" />
     <Content Include="Asset\client\assets\css\main.css" />
     <Content Include="Asset\client\assets\css\responsive.css" />
@@ -3875,6 +3877,8 @@
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Shared\_LoginAndRegister.cshtml" />
+    <Content Include="Views\Shared\_CartAndOrder.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

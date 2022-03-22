@@ -90,6 +90,7 @@ namespace Ebooks.Controllers
                 {
                     ViewBag.Notification = "Chúc mừng bạn đăng nhập thành công";
                     Session["username"] = ct;
+                    return RedirectToAction("Index","Books");
                 }
                 else
                 {
@@ -99,6 +100,14 @@ namespace Ebooks.Controllers
             }
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Books");
+        }
+
+      
 
     }
 }
