@@ -447,3 +447,7 @@ input, button, select, optgroup, textarea {
 .home-product__contain:hover .home__product-information {
     display: block;
 }
+
+.name-n-phone {
+    display: flex;
+}

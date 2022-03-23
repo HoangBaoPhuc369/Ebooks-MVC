@@ -1107,7 +1107,7 @@ namespace Ebooks.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1127,7 +1127,7 @@ namespace Ebooks.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_order", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_order", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id_order
 		{
 			get
@@ -1151,7 +1151,7 @@ namespace Ebooks.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_book", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_book", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id_book
 		{
 			get

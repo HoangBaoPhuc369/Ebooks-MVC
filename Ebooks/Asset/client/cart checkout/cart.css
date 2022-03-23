@@ -1105,3 +1105,112 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.name-n-phone {
+    display: flex;
+}
+
+.divided {
+    width: 2rem;
+}
+
+.checkout-address-input {
+    height: 55px;
+    resize: none;
+    padding: 10px;
+}
+
+.auth-form__aside {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    height: 52px;
+    box-sizing: border-box;
+    line-height: 120%;
+    font-size: 12px;
+    position: relative;
+    background: #fff8e4;
+    color: rgba(0,0,0,.65);
+    margin-top: 3px;
+}
+
+.auth-form__policy-text {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.auth-form__aside svg {
+    max-width: 20px;
+    margin-right: 8px;
+}
+
+.auth-form__text-link {
+    text-decoration: none;
+    color: unset;
+}
+
+.auth-form__choose-type-address {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 21px;
+    font-size: 1.4rem;
+}
+
+.auth-form__type-address {
+    margin-right: 10px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+    color: #555;
+}
+
+.auth-form__type-address-choose, .auth-form__type-address-btn {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.auth-form__type-address-btn {
+    padding: 0 12px;
+    margin-right: 10px;
+    height: 40px;
+    max-width: 146px;
+    border: 1px solid rgba(0,0,0,.09);
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 3%);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+    .auth-form__type-address-btn span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+.__type-address-btn--active {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.auth-form__controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 80px;
+    margin-bottom: 26px;
+}
+
+.btn-w-140 {
+    min-width: 140px;
+}
+
+.auth-form__controls-back {
+    margin-right: 8px;
+    background: #fff;
+}
+
+.btn-w-140:hover {
+    background-color: #f05d40;
+}

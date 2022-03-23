@@ -164,10 +164,10 @@ namespace Ebooks.Controllers
             Book s = new Book();
 
             List<Cart> gh = GetCarts();
-            var date_delivery = String.Format("{0:MM/dd/yyyy}", collection["date_delivery"]);
+            //var date_delivery = String.Format("{0:MM/dd/yyyy}", collection["date_delivery"]);
             dh.id_customer = kh.id;
             dh.date_create = DateTime.Now;
-            dh.date_delivery = DateTime.Parse(date_delivery);
+            //dh.date_delivery = DateTime.Parse(date_delivery);
             dh.status = false;
             dh.paid = false;
 
@@ -196,5 +196,47 @@ namespace Ebooks.Controllers
             return View();
         }
 
+        public ActionResult RegisterInfo()
+        {
+            return Order();
+        }
+
+        //Ham Post nhan du lieu tu trang Register va thuc hien viec tao moi du lieu
+        [HttpPost]
+        public ActionResult RegisterInfo(FormCollection collection)
+        {
+            customer kh = (customer)Session["username"];
+            var D_customer = data.customers.Where(m => m.id == kh.id).First();
+            if (D_customer != null)
+            {
+                //Gan cac gia tri nguoi dung nhap lieu cac bien
+                var Name = collection["Name"];
+                var Contact = collection["Contact"];
+                var Address = collection["Address"];
+                if (String.IsNullOrEmpty(Name))
+                {
+                    ViewData["err1"] = "Bạn cần nhập họ và tên";
+                }
+                else if (String.IsNullOrEmpty(Contact))
+                {
+                    ViewData["err2"] = "Bạn cần nhập số điện thoại";
+                }
+                else if (String.IsNullOrEmpty(Address))
+                {
+                    ViewData["err3"] = "Bạn cần nhập địa chỉ";
+                }
+                else
+                {
+                    //Gan gia tri cho doi tuong duoc tao moi (customer)
+                    kh.name = Name;
+                    kh.contact = Contact;
+                    kh.address = Address;
+                    UpdateModel(kh);
+                    data.SubmitChanges();
+                    return RedirectToAction("Order");
+                }
+            }
+            return RedirectToAction("Order");
+        }
     }
 }
