@@ -207,10 +207,10 @@
 }
 
 .cart__product-main {
-    display: flex;
+   /* display: flex;
     align-items: center;
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 50%;*/
 }
 
 .product__amount-main-minus svg {
@@ -253,7 +253,7 @@
 }
 
 .cart__product-pay-total {
-    display: flex;
+    /*display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
@@ -261,7 +261,7 @@
     flex: 0 0 100%;
     max-width: 100%;
     padding: 12px 0;
-    margin-top: 10px;
+    margin-top: 10px;*/
 }
 
 .cart__product-pay-total-order {

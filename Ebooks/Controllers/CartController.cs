@@ -231,7 +231,10 @@ namespace Ebooks.Controllers
                     kh.name = Name;
                     kh.contact = Contact;
                     kh.address = Address;
-                    UpdateModel(kh);
+                    D_customer.name = Name;
+                    D_customer.contact = Contact;
+                    D_customer.address = Address;
+                    UpdateModel(D_customer);
                     data.SubmitChanges();
                     return RedirectToAction("Order");
                 }

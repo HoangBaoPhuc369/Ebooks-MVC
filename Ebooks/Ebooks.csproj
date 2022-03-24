@@ -210,6 +210,9 @@
     <Content Include="Asset\client\assets\img\l-sp-1-1.jpg" />
     <Content Include="Asset\client\cart checkout\cart.css" />
     <Content Include="Asset\client\cart checkout\cart1 checkout.html" />
+    <Content Include="Asset\client\product order\cart.css" />
+    <Content Include="Asset\client\product order\product_order.css" />
+    <Content Include="Asset\client\product order\product_order.html" />
     <Content Include="Content\grid.css" />
     <Content Include="Asset\client\assets\css\main.css" />
     <Content Include="Asset\client\assets\css\responsive.css" />
@@ -3880,7 +3883,6 @@
     <Content Include="Views\Shared\_LoginAndRegister.cshtml" />
     <Content Include="Views\Shared\_CartAndOrder.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
-    <Content Include="Views\Cart\RegisterInfo.cshtml" />
     <Content Include="Views\Cart\ConfirmOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
