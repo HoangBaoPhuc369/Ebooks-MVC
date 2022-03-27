@@ -66,13 +66,8 @@ namespace Ebooks.Areas.Admin.Controllers
             }
             return this.Edit(id);
         }
+
         public ActionResult Delete(int id)
-        {
-            var D_theloai = data.categories.First(m => m.id == id);
-            return View(D_theloai);
-        }
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
         {
             var D_theloai = data.categories.Where(m => m.id == id).First();
             data.categories.DeleteOnSubmit(D_theloai);

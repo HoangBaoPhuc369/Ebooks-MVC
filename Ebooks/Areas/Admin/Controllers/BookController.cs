@@ -16,6 +16,7 @@ namespace Ebooks.Areas.Admin.Controllers
             var all_sach = from s in data.Books select s;
             return View(all_sach);
         }
+        
         public ActionResult Detail(int id)
         {
             var D_sach = data.Books.Where(m => m.id == id).First();
@@ -23,8 +24,15 @@ namespace Ebooks.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
+            // Lấy toàn bộ thể loại:
+            List<category> cate = data.categories.ToList();
+            // Tạo SelectList
+            SelectList cateList = new SelectList(cate, "id", "name");
+            // Set vào ViewBag
+            ViewBag.CategoryList = cateList;
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(FormCollection collection, Book s)
         {
@@ -52,6 +60,9 @@ namespace Ebooks.Areas.Admin.Controllers
         }
         public ActionResult Edit(int id)
         {
+            var Category = from ca in data.categories
+                           select new { ca.id, ca.name };
+            ViewBag.Categories = new SelectList(Category, "id", "name", id);
             var E_sach = data.Books.First(m => m.id == id);
             return View(E_sach);
         }
@@ -82,12 +93,6 @@ namespace Ebooks.Areas.Admin.Controllers
         }
         //-----------------------------------------
         public ActionResult Delete(int id)
-        {
-            var D_sach = data.Books.First(m => m.id == id);
-            return View(D_sach);
-        }
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
         {
             var D_sach = data.Books.Where(m => m.id == id).First();
             data.Books.DeleteOnSubmit(D_sach);

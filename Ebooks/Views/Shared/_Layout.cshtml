@@ -108,7 +108,7 @@
                             customer ct = (customer)Session["username"];
                         }
                         @{
-                            if (Session["username"] != null)
+                            if (Session["username"] != null) //== 1 
                             {
                                 <li class="header__navbar-item header__navbar-user">
                                     <img src="https://lh3.googleusercontent.com/ogw/ADea4I5aZLTqnv_GXfIYMPEzLi3NracVVYpl3RBt5dAZ7w=s83-c-mo" alt="" class="header__navbar-user-img">
@@ -120,11 +120,7 @@
                                         </li>
 
                                         <li class="header__navbar-user-item">
-                                            <a href="">Địa chỉ của tôi</a>
-                                        </li>
-
-                                        <li class="header__navbar-user-item">
-                                            <a href="">Đơn mua</a>
+                                            <a href="@Url.Action("ConfirmOrder", "Cart")">Đơn mua</a>
                                         </li>
 
                                         <li class="header__navbar-user-item header__navbar-user-item--separate">
@@ -325,7 +321,7 @@
 
             <div class="footer-bottom">
                 <div class="grid wide">
-                    <p class="footer__text">2021 Bản quyền thuộc về F8</p>
+                    <p class="footer__text">2021 Bản quyền thuộc về EBooks</p>
                 </div>
             </div>
         </footer>

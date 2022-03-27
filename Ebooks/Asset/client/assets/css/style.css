@@ -252,16 +252,16 @@
     margin: 10px;
 }
 
-.cart__product-pay-total {
-    /*display: flex;
+.cart__pay-total {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     user-select: none;
     flex: 0 0 100%;
     max-width: 100%;
-    padding: 12px 0;
-    margin-top: 10px;*/
+    padding: 20px;
+    margin-top: 10px;
 }
 
 .cart__product-pay-total-order {

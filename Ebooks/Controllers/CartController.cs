@@ -1,5 +1,4 @@
-﻿using Ebooks.Areas.Admin.Models;
-using Ebooks.Models;
+﻿using Ebooks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,14 +141,14 @@ namespace Ebooks.Controllers
         [HttpGet]
         public ActionResult Order()
         {
-            //if (Session["username"] == null || Session["username"].ToString() == "")
-            //{
-            //    return RedirectToAction("Login", "Customer");
-            //}
-            //if (Session["Cart"] == null)
-            //{
-            //    return RedirectToAction("Index", "Books");
-            //}
+            if (Session["username"] == null || Session["username"].ToString() == "")
+            {
+                return RedirectToAction("Login", "Customer");
+            }
+            if (Session["Cart"] == null)
+            {
+                return RedirectToAction("Index", "Books");
+            }
             List<Cart> lstCart = GetCarts();
             ViewBag.TotalQty = TotalQty();
             ViewBag.TotalPrice = TotalPrice();
@@ -179,7 +178,7 @@ namespace Ebooks.Controllers
                 ctdh.id_order = dh.id;
                 ctdh.id_book = item.book_id;
                 ctdh.amount = item.qty;
-                ctdh.unit_price = (double)item.price;
+                ctdh.unit_price = (double)item.total;
                 s = data.Books.Single(n => n.id == item.book_id);
                 s.qty -= ctdh.amount;
                 data.SubmitChanges();
@@ -193,6 +192,22 @@ namespace Ebooks.Controllers
 
         public ActionResult ConfirmOrder()
         {
+            customer kh = (customer)Session["username"];
+            var query =  from o in data.orders
+                         join ol in data.order_lists on o.id equals ol.id_order
+                         join b in data.Books on ol.id_book equals b.id
+                         join ca in data.categories on b.category_id equals ca.id
+                         where o.id_customer == kh.id
+                         select new CustomerOrder 
+                         { 
+                             BookImage = b.image_path,
+                             BookName = b.title,
+                             BookAmount = (int)ol.amount,
+                             BookCate = ca.name,
+                             BookUnitPrice = (double)b.price,
+                             TotalPriceBook = (double)ol.unit_price
+                         };
+            ViewBag.OrderCustomer = query;
             return View();
         }
 
