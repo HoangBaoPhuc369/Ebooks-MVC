@@ -178,11 +178,15 @@
     <Compile Include="Areas\Admin\Controllers\BookController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\BookOrder.cs" />
+    <Compile Include="Areas\Admin\Models\CustomerOrders.cs" />
     <Compile Include="Areas\Admin\Models\MyAdminData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MyAdminData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Models\OrderManage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -205,6 +209,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\admin\css\btnSubmit.css" />
     <Content Include="Content\formAction.css" />
     <Content Include="Asset\admin\css\sb-admin-2.css" />
     <Content Include="Asset\admin\css\sb-admin-2.min.css" />
@@ -3813,6 +3818,12 @@
     <Content Include="Asset\client\assets\fonts\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Asset\client\assets\fonts\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.woff" />
     <Content Include="Asset\client\assets\fonts\fontawesome-free-5.15.4-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Models\MyData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MyData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Order\Orders.cshtml" />
     <Content Include="Areas\Admin\Models\MyAdminData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MyAdminData.designer.cs</LastGenOutput>
@@ -3821,11 +3832,8 @@
     <None Include="Areas\Admin\Models\MyAdminData.dbml.layout">
       <DependentUpon>MyAdminData.dbml</DependentUpon>
     </None>
-    <Content Include="Models\MyData.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>MyData.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Areas\Admin\Views\Order\ManageOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3889,7 +3897,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

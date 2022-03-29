@@ -58,4 +58,13 @@
       <Association Name="customer_order" Member="customer" ThisKey="id_customer" OtherKey="id" Type="customer" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

@@ -67,7 +67,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">Quản lý đơn hàng</a>
+                <a class="collapse-item" href="@Url.Action("Orders", "Order")">Quản lý đơn hàng</a>
                 <a class="collapse-item" href="utilities-border.html">Quản lý doanh thu</a>
             </div>
         </div>
@@ -116,10 +116,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @{ 
+                        int i = 0;
+                    }
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.id</td>
+                            <td>@(++i)</td>
                             <td>
                                 <div class="d-flex w-100 jus-cont-center">
                                     <div class="img-field img-thumbnail rounded">

@@ -203,3 +203,22 @@ form .button {
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
+
+.btn-submit__admin {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #2f56c8;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
