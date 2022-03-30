@@ -16,14 +16,11 @@ namespace Ebooks.Models
         {
             if (page == null) page = 1;
             var all_sach = (from s in data.Books select s).OrderBy(m => m.id);
-            int pageSize = 5;
+            int pageSize = 15;
             int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            ViewBag.ListCategory = query;
             return View(all_sach.ToPagedList(pageNum, pageSize));
-        }
-
-        public ActionResult Header()
-        {
-            return View(); ;
         }
 
         public ActionResult Detail(int id)

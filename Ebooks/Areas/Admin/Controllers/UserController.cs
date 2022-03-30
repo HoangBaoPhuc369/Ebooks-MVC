@@ -53,7 +53,92 @@ namespace Ebooks.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Index", "Books");
+            return RedirectToAction("Login", "User");
+        }
+
+        public ActionResult MangeUser()
+        {
+            var all_user = from u in data.users select u;
+            return View(all_user);
+        }
+
+        public ActionResult Create()
+        {
+            var type = new List<string> { "Admin", "Staff" };
+            SelectList typeList = new SelectList(type);
+            ViewBag.TypeUser = typeList;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(FormCollection collection, user s)
+        {
+            var E_hoten = collection["Name"];
+            var E_username = collection["Username"];
+            var E_password = collection["Password"];
+            var E_type = collection["Type"];
+            if (string.IsNullOrEmpty(E_hoten))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                s.name = E_hoten.ToString();
+                s.username = E_username.ToString();
+                s.password = E_password;
+                if (E_type == "Admin")
+                {
+                    s.type = 1;
+                }
+                else if (E_type == "Staff")
+                {
+                    s.type = 0;
+                }
+               
+                data.users.InsertOnSubmit(s);
+                data.SubmitChanges();
+                return RedirectToAction("MangeUser");
+            }
+            return this.Create();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var E_user = data.users.First(m => m.id == id);
+            return View(E_user);
+        }
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            var E_user = data.users.First(m => m.id == id);
+            var E_hoten = collection["Name"];
+            var E_username = collection["Username"];
+            var E_password = collection["Password"];
+            var E_type = Convert.ToByte(collection["Type"]);
+            E_user.id = id;
+            if (string.IsNullOrEmpty(E_hoten))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                E_user.name = E_hoten;
+                E_user.username = E_username;
+                E_user.password = E_password;
+                E_user.type = E_type;
+                UpdateModel(E_user);
+                data.SubmitChanges();
+                return RedirectToAction("MangeUser");
+            }
+            return this.Edit(id);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var D_user = data.users.Where(m => m.id == id).First();
+            data.users.DeleteOnSubmit(D_user);
+            data.SubmitChanges();
+            return RedirectToAction("MangeUser");
         }
     }
 }

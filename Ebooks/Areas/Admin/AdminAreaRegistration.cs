@@ -17,7 +17,7 @@ namespace Ebooks.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "ListBook", Controller = "Book", id = UrlParameter.Optional }
+                new { action = "Login", Controller = "User", id = UrlParameter.Optional }
             );
         }
     }

@@ -71,6 +71,40 @@
             </div>
         </div>
     </li>
+    @using Ebooks.Areas.Admin.Models
+    @{
+        user ct = (user)Session["username"];
+    }
+    @{
+        if (ct.type == 1 && ct != null)
+        {
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                ACCOUNT
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="false" aria-controls="collapsePages">
+                    <i class="fas fa-user-gear"></i>
+                    <span>Quản lý tài khoản</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="login.html">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("MangeUser", "User")">Nhân viên</a>
+                    </div>
+                </div>
+            </li>
+        }
+        else
+        {
+            <div></div>
+        }
+    }
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
