@@ -196,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BookSold.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CustomerOrder.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -3896,6 +3897,7 @@
     <Content Include="Views\Shared\_CartAndOrder.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\ConfirmOrder.cshtml" />
+    <Content Include="Views\Books\BookInCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

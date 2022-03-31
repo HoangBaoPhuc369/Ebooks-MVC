@@ -38,9 +38,24 @@
                         </div>
                         Vận chuyển tới
                     </div>
-                    <div class="address-customer">
-                        Chưa có địa chỉ vận chuyển
-                    </div>
+                    @using Ebooks.Models
+                    @{
+                        customer ct = (customer)Session["username"];
+                    }
+                    @{
+                        if (ct != null)
+                        {
+                            <div class="address-customer">
+
+                                @ct.address
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="address-customer"></div>
+                        }
+                    }
+
                 </div>
                 @using (Html.BeginForm("Add2Cart", "Cart", new { @id = Model.id, @strURL = Request.Url.ToString() }))
                 {
@@ -56,7 +71,7 @@
                     <div class="d-flex jusctify-content-center product-btn">
                         <div class="product-btn-cart">
                             <div class="product-btn-cart-content">
-                                <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="submit" id="add_to_cart" onclick="location.href='@Url.Action("Add2Cart", "Cart", new { @id = Model.id, @strURL = Request.Url.ToString() })';">
+                                <div class="btn-t-2 btn-add-2-cart btn-block d-flex">
                                     <div class="product-btn-cart-main">
                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 511.976 511.976" style="enable-background:new 0 0 511.976 511.976;" xml:space="preserve">
@@ -90,17 +105,18 @@
                                     </svg>
                                     </div>
 
-                                    <span class="product-btn-add-product-text">Thêm vào giỏ hàng</span>
-                                </button>
+                                    <input class="product-btn-add-product-text" value="Thêm vào giỏ hàng" type="submit" name="addcart">
+                                </div>
                             </div>
                         </div>
-                        <a href="" class="product-btn-buy-now">
+                        <div  class="product-btn-buy-now">
                             <div class="product-btn-buy-content">
-                                <button class="btn-t-2 btn-add-2-cart btn-block d-flex" type="button" id="buy_now">
-                                    <span class="product-btn-buy-product-text">Mua ngay</span>
-                                </button>
+                                <div class="btn-t-2 btn-add-2-cart btn-block d-flex" id="">
+                                    <input type="submit" name="buynow" value="Mua ngay" class="btn-buy-now">
+                                    @*<span class="product-btn-buy-product-text">Mua ngay</span>*@
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 }
             </div>

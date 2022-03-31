@@ -23,16 +23,28 @@ namespace Ebooks.Controllers
             }
             return lstGiohang;
         }
-        public ActionResult Add2Cart(int id, string strUrl, FormCollection collection)
+        public ActionResult Add2Cart(string addcart, string buynow, int id, string strUrl, FormCollection collection)
         {
             List<Cart> lstGiohang = GetCarts();
             Cart sanpham = lstGiohang.Find(n => n.book_id == id);
-            if (sanpham == null)
+            if (sanpham == null && addcart != null)
             {
                 sanpham = new Cart(id);
                 sanpham.qty = int.Parse(collection["txtSoLg"].ToString());
                 lstGiohang.Add(sanpham);
                 return Redirect(strUrl);
+            }
+            else if (sanpham == null && buynow != null)
+            {
+                sanpham = new Cart(id);
+                sanpham.qty = int.Parse(collection["txtSoLg"].ToString());
+                lstGiohang.Add(sanpham);
+                return RedirectToAction("Cart");
+            }
+            else if (sanpham != null && buynow != null)
+            {
+                sanpham.qty = sanpham.qty + int.Parse(collection["txtSoLg"].ToString());
+                return RedirectToAction("Cart");
             }
             else
             {
@@ -40,6 +52,7 @@ namespace Ebooks.Controllers
                 return Redirect(strUrl);
             }
         }
+
 
         private int TotalQty()
         {

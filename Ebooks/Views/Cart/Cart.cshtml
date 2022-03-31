@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section product_order {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+}
+
 <div class="main-field__cart">
     <div class="cart__bill--header" id="header__cart">
         <div class="cart__bill-left">
@@ -64,11 +68,19 @@
 
                                     <div class="l-3">
                                         <div class="d-flex product__amount-main">
-                                            <input type="submit" id="plus-btn" onclick="changeQuantity('minus');" class="product__amount-main-minus format-btn btn-minus" value="-">
-                                            @*<svg class="svg-inline--fa fa-minus fa-minuss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>*@
-                                            <input min="1" name="txtSoLg" id="txtQuantity" class="product__amount-main-input-content form-control-sm qty-input" value="@item.qty">
-                                            <input type="submit" onclick="changeQuantity('plus');" id="minus-btn" class="product__amount-main-plus format-btn btn-plus" value="+">
-                                            @*<b><svg class="svg-inline--fa fa-plus fa-pluss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b>*@
+                                            <button type="submit" id="sub" class="product__amount-main-minus sub btn-minus format-btn">-</button>
+                                            <input type="text" min="1" name="txtSoLg" id="txtQuantity" value="@item.qty" class="product__amount-main-input-content form-control-sm qty-input">
+                                            <button type="submit" id="add" class="product__amount-main-plus btn-plus add format-btn-plus">+</button>
+
+                                            @*<input type="submit" id="sub" onclick="changeQuantity('minus');" class="product__amount-main-minus sub format-btn btn-minus" value="-">
+                                                <input min="1" name="txtSoLg" id="" class="product__amount-main-input-content form-control-sm qty-input" value="@item.qty">
+                                                <input type="submit" onclick="changeQuantity('plus');" id="minus-btn" class="product__amount-main-plus format-btn btn-plus" value="+">
+
+                                                <b><svg class="svg-inline--fa fa-plus fa-pluss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b>
+                                                <svg class="svg-inline--fa fa-minus fa-minuss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+
+                                            *@
+
                                         </div>
                                     </div>
                                     <div class="l-3">
@@ -103,7 +115,7 @@
                     <span>đ</span>
                 </div>
 
-                <button class="btn product-btn-buy" id="checkout" onclick="location.href='@Url.Action("Order", "Cart")'"  type="button">Mua Hàng</button>
+                <button class="btn product-btn-buy" id="checkout" onclick="location.href='@Url.Action("Order", "Cart")'" type="button">Mua Hàng</button>
 
             </div>
         </div>
@@ -111,18 +123,12 @@
 </div>
 
 @section script{
-    <script type="text/javascript">
-        function changeQuantity(type) {
-            var currentQty = $("#txtQuantity").val();
-            if (type == 'plus') {
-                $("#txtQuantity").val(parseInt(currentQty, 10) + 1);
-            }
-            else if (currentQty < 2) {
-                $("#txtQuantity").val('1');
-            }
-            else {
-                $("#txtQuantity").val(parseInt(currentQty, 10) - 1);
-            }
-        }
+    <script>
+        $('.add').click(function () {
+            $(this).prev().val(+$(this).prev().val() + 1);
+        });
+        $('.sub').click(function () {
+            if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+        });
     </script>
 }

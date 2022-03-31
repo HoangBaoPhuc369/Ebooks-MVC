@@ -19,7 +19,16 @@ namespace Ebooks.Models
             int pageSize = 15;
             int pageNum = page ?? 1;
             var query = from c in data.categories select c;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
             ViewBag.ListCategory = query;
+            ViewBag.BookSold = booksold;
             return View(all_sach.ToPagedList(pageNum, pageSize));
         }
 
@@ -111,5 +120,17 @@ namespace Ebooks.Models
             return "/Asset/admin/img/" + file.FileName;
         }
 
+
+        public ActionResult BookInCate(int? page, int id)
+        {
+            if (page == null) page = 1;
+            var all_sach = (from s in data.Books where s.category_id == id select s).OrderBy(m => m.id);
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            ViewBag.ListCategory = query;
+            ViewBag.IdCategory = id;
+            return View(all_sach.ToPagedList(pageNum, pageSize));
+        }
     }
 }

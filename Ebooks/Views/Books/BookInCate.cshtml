@@ -1,7 +1,7 @@
 ﻿@model PagedList.IPagedList<Ebooks.Models.Book>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "BookInCate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,14 +10,24 @@
         <div class="card-header">Danh mục</div>
         <div class="card-body category-list">
             <ul class='list-group' id='cat-list'>
-                <li class='list-group-item active'>
+                <li class='list-group-item'>
                     <a href="@Url.Action("Index", "Books")" class="list-group-item-a">Tất Cả</a>
                 </li>
                 @foreach (var item in ViewBag.ListCategory)
                 {
-                    <li class='list-group-item'>
-                        <a href="@Url.Action("BookInCate", "Books", new { @id = item.id})" class="list-group-item-a">@item.name</a>
-                    </li>
+                    if (item.id == ViewBag.IdCategory)
+                    {
+                        <li class='list-group-item active'>
+                            <a href="@Url.Action("BookInCate", "Books", new { @id = item.id})" class="list-group-item-a">@item.name</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='list-group-item'>
+                            <a href="@Url.Action("BookInCate", "Books", new { @id = item.id})" class="list-group-item-a">@item.name</a>
+                        </li>
+                    }
+
                 }
             </ul>
 
@@ -113,21 +123,11 @@
                         <div class="home-product-item__img" style="background-image: url(@item.image_path);"></div>
                         <h4 class="home-product-item__name">@item.title</h4>
                         <div class="home-product-item__price">
-                            <div class="home-product-item__price-current"><span class="copper__character">₫</span>@item.price</div>
-
-                            @{
-                                foreach (var b in ViewBag.BookSold)
-                                {
-                                    if (b.Book_id == item.id && b.Book_qty_sold > 0)
-                                    {
-                                        <span class="home-product-item__sold">@b.Book_qty_sold Đã bán</span>
-                                    }
-                                }
-                            }
+                            <span class="home-product-item__price-current"><span class="copper__character">₫</span>@item.price</span>
                         </div>
 
                         <div class="home-product-item__action">
-                            @*<span class="home-product-item__like home-product-item__liked">
+                            <span class="home-product-item__like home-product-item__liked">
                                 <i class="home-product-item__like-icon-empty far fa-heart"></i>
                                 <i class="home-product-item__like-icon-full fas fa-heart"></i>
                             </span>
@@ -138,9 +138,8 @@
                                 <i class="home-product-item__star--gold fas fa-star"></i>
                                 <i class="home-product-item__star--gold fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </div>*@
-                          
-
+                            </div>
+                            <span class="home-product-item__sold">@item.qty Đã bán</span>
                         </div>
 
                         @*<div class="home-product-item__origin">
@@ -244,6 +243,7 @@
         display: none;
     }
 </style>
+
 
 
 
