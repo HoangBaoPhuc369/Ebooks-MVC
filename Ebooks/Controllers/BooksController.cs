@@ -32,6 +32,28 @@ namespace Ebooks.Models
             return View(all_sach.ToPagedList(pageNum, pageSize));
         }
 
+        [HttpPost]
+        public ActionResult Index(int? page, string search)
+        {
+            if (page == null) page = 1;
+            var all_sach = (from s in data.Books where s.title.Contains(search) || s.category.name.Contains(search) select s).OrderBy(m => m.id);
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
+            ViewBag.ListCategory = query;
+            ViewBag.BookSold = booksold;
+            return View(all_sach.ToPagedList(pageNum, pageSize));
+        }
+
+
         public ActionResult Detail(int id)
         {
             var D_sach = data.Books.Where(m => m.id == id).First();
@@ -128,9 +150,52 @@ namespace Ebooks.Models
             int pageSize = 15;
             int pageNum = page ?? 1;
             var query = from c in data.categories select c;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
             ViewBag.ListCategory = query;
             ViewBag.IdCategory = id;
+            ViewBag.BookSold = booksold;
             return View(all_sach.ToPagedList(pageNum, pageSize));
         }
+
+        //public ActionResult BookInSale(int? page)
+        //{
+        //    if (page == null) page = 1;
+        //    var all_sach = (from s in data.Books select s).OrderBy(m => m.id);
+        //    int pageSize = 15;
+        //    int pageNum = page ?? 1;
+        //    var query = from c in data.categories select c;
+        //    var booksold = from b in data.Books
+        //                   join ol in data.order_lists on b.id equals ol.id_book
+        //                   group new { b, ol } by new { b.id } into g
+        //                   select new BookSold
+        //                   {
+        //                       Book_id = g.Key.id,
+        //                       Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+        //                   };
+        //    var booksale = from b in data.Books
+        //                   join ol in data.order_lists on b.id equals ol.id_book
+        //                   group new { b, ol } by new { b.id, b.title, b.price, b.image_path} into g
+        //                   orderby g.Sum(n => Convert.ToInt32(n.ol.amount)) descending
+        //                   select new BookSold
+        //                   {
+        //                       Book_id = g.Key.id,
+        //                       Book_image = g.Key.image_path,
+        //                       Book_name = g.Key.title,
+        //                       Book_price = Convert.ToDouble(g.Key.price),
+        //                       Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+        //                   };
+        //    ViewBag.ListCategory = query;
+        //    ViewBag.BookSold = booksold;
+        //    ViewBag.BookInSale = booksale;
+        //    return View(all_sach.ToPagedList(pageNum, pageSize));
+        //}
+
     }
 }

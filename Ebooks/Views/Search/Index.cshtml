@@ -1,0 +1,73 @@
+﻿@model Ebooks.Models.Book
+@{
+    ViewBag.Title = "Search";
+    Layout = null;
+}
+
+<meta charset="utf-8">
+<title>jQuery UI Autocomplete - Default functionality</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<div class="ui-widget">
+    <p>Available Companies:</p>
+    <label for="tags">Tags: </label>
+
+    @using (Html.BeginForm())
+    {
+        <input id="tags" name="tags" type="text">
+        <input type="submit" value="search" />
+
+    }
+</div>
+
+
+@if (Model != null)
+{
+
+    <h1>@Model.title</h1>
+    <h2>@Model.author</h2>
+    <h3>@Model.description</h3>
+}
+
+
+<script>
+
+    $(function () {
+
+        var availableTags = [];
+        $.ajax(
+            {
+
+                type: 'GET',
+                url: '/Search/getcompanies',
+                success: function (response) {
+
+                    $.each(response, function (key, item) {
+
+
+                        availableTags.push(item.title);
+
+
+                    });
+
+
+
+                }
+
+            });
+
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    });
+
+
+
+
+
+
+</script>
+

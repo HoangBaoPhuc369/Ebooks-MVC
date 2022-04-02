@@ -554,3 +554,10 @@ input, button, select, optgroup, textarea {
     font-size: 15px;
     color: #fff;
 }
+
+.form-search-heading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
