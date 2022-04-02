@@ -1,4 +1,6 @@
 ﻿using Ebooks.Models;
+using Ebooks.MoMoPayment;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -195,7 +197,7 @@ namespace Ebooks.Controllers
                 s = data.Books.Single(n => n.id == item.book_id);
                 s.qty -= ctdh.amount;
                 data.SubmitChanges();
-
+               
                 data.order_lists.InsertOnSubmit(ctdh);
             } 
             data.SubmitChanges();
@@ -269,5 +271,98 @@ namespace Ebooks.Controllers
             }
             return RedirectToAction("Order");
         }
+
+        public ActionResult OrderMoMo()
+        {
+            order dh = new order();
+            customer kh = (customer)Session["username"];
+            Book s = new Book();
+            List<Cart> gh = GetCarts();
+            dh.id_customer = kh.id;
+            dh.date_create = DateTime.Now;
+            dh.status = false;
+            dh.paid = false;
+
+            data.orders.InsertOnSubmit(dh);
+            data.SubmitChanges();
+            foreach (var item in gh)
+            {
+                order_list ctdh = new order_list();
+                ctdh.id_order = dh.id;
+                ctdh.id_book = item.book_id;
+                ctdh.amount = item.qty;
+                ctdh.unit_price = (double)item.total;
+                s = data.Books.Single(n => n.id == item.book_id);
+                s.qty -= ctdh.amount;
+                data.SubmitChanges();
+
+                data.order_lists.InsertOnSubmit(ctdh);
+            }
+            data.SubmitChanges();
+            Session["Cart"] = null;
+            return RedirectToAction("ConfirmOrder", "Cart");
+        }
+
+
+        public ActionResult Payment()
+        {
+            List<Cart> gh = GetCarts();
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMO7EVQ20220329";
+            string accessKey = "2UlpvafBHM2XkWkD";
+            string serectkey = "2NcYVTZQjNjZ62VnxQlDPApmsUwpS6u0";
+            string orderInfo = "test";
+            string returnUrl = "https://localhost:44358/Cart/OrderMoMo";
+            string notifyurl = " http://c40f-2405-4802-91b8-6d70-ccca-2655-a56d-e6f5.ngrok.io/Cart/Order"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = gh.Sum(n => n.total).ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+
     }
+
+
 }

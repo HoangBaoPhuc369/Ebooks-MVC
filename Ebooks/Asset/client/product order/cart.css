@@ -911,6 +911,7 @@
     display: inline-flex;
     margin-bottom: 0;
     margin-top: 0.625rem;
+    text-decoration: none;
 }
 
 .method-variation {
