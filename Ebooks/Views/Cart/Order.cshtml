@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="checkout__shipping-unit-changes">THAY ĐỔI</div>
-                    <div class="checkout__shipping-unit-price">30.000đ</div>
+                    @*<div class="checkout__shipping-unit-price">30.000đ</div>*@
                 </div>
             </div>
 
@@ -145,10 +145,10 @@
             <div class="checkout__order">
                 <div class="checkout__order-total-product checkout__order-font checkout__order-grid-column">Tổng tiền hàng</div>
                 <div class="checkout__order-product-price checkout__order-font checkout__order-total-product">@String.Format("{0:0,0}", @ViewBag.TotalPrice)đ</div>
-                <div class="checkout__order-fee-shipping checkout__order-fee-shipping-rows checkout__order-font checkout__order-grid-column">Phí vận chuyển</div>
-                <div class="checkout__order-product-price checkout__order-fee-shipping-rows checkout__order-font">30.000đ</div>
+                @*<div class="checkout__order-fee-shipping checkout__order-fee-shipping-rows checkout__order-font checkout__order-grid-column">Phí vận chuyển</div>*@
+                @*<div class="checkout__order-product-price checkout__order-fee-shipping-rows checkout__order-font">30.000đ</div>*@
                 <div class="checkout__order-total-all checkout__order-font checkout__order-grid-column">Tổng thanh toán: </div>
-                <div class="checkout__order-product-price checkout__order-total-all checkout__order-font checkout__order-total-all-price">@String.Format("{0:0,0}", @ViewBag.TotalPrice + 30000)đ</div>
+                <div class="checkout__order-product-price checkout__order-total-all checkout__order-font checkout__order-total-all-price">@String.Format("{0:0,0}", @ViewBag.TotalPrice)đ</div>
                 <div class="checkout__order-submit">
                     <div class="checkout__order-submit-term-of-service">
                         <div class="checkout__order-TOS-content">
