@@ -47,21 +47,29 @@
     <link href="~/Asset/client/product order/product_order.css" rel="stylesheet" />
 }
 <div class="col l-2 m-0 c-0">
-    <nav class="category">
-        <!-- <h3 class="category-heading">Danh mục</h3>
-        <ul class="category-list">
-            <li class="category-item category-item--active">
-                <a href="" class="category-item__link">Sản phẩm</a>
-            </li>
+    <nav class="">
+        @using Ebooks.Models
+        @{
+            customer ct = (customer)Session["username"];
+        }
+        @{
+            if (Session["username"] != null)
+            {
+                <div class="sidebar-user">
+                    <img src="@ct.image_path" alt="" class="sidebar-user-img">
+                    <div class="sidebar-user-name">
+                        <div class="sidebar_user_name">
+                            @ct.username
+                        </div>
+                        <a href="@Url.Action("CustomerInfo", "Customer", new { @id = ct.id})" class="sidebar-link-user">
+                            <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;"><path d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48" fill="#9B9B9B" fill-rule="evenodd"></path></svg>
+                            Sửa Hồ Sơ
+                        </a>
+                    </div>
+                </div>
 
-            <li class="category-item">
-                <a href="" class="category-item__link">Top bán chạy</a>
-            </li>
-
-            <li class="category-item">
-                <a href="" class="category-item__link">Combo ưu đãi</a>
-            </li>
-        </ul> -->
+            }
+        }
     </nav>
 </div>
 
@@ -114,7 +122,17 @@
                     </div>
 
                     <div class="cart__product-status">
-                        <span>CHỜ XÁC NHẬN</span>
+                        @{
+                            if (item.Book_order_status == 1)
+                            {
+                                <span>XÁC NHẬN</span>
+                            }
+                            else if (item.Book_order_status == 0)
+                            {
+                                <span style="color: #26aa99;">CHỜ XÁC NHẬN</span>
+                            }
+                        }
+
                     </div>
                 </div>
 
@@ -130,16 +148,17 @@
                                         @item.BookName
                                     </span>
                                 </div>
-                                <div class="cart__product--categories" style="font-size: 1.3rem; color: lavender">Thể loại: @item.BookCate</div>
-                                <div class="cart__product--amount">x @item.BookAmount</div>
+                                <div class="cart__product--categories" style="font-size: 1.3rem; color: rgba(0,0,0,.54); margin-bottom: 5px;">Thể loại: @item.BookCate</div>
+                                <div class="cart__product--amount" style="font-size: 1.3rem; margin-left: 2px; }">x @item.BookAmount</div>
                             </div>
                         </div>
 
 
                     </div>
                     <div class="cart__product-main-price">
-                        @*<div class="cart__product-main-price price--old">19.000đ</div>*@
-                        <div class="cart__product-main-price price--new">@item.BookUnitPrice đ</div>
+                        @*<div class="cart__product-main-price price--old">19.000đ</div>  @String.Format("{0:0,0}", item.price)  *@
+                        <div class="cart__product-main-price price--new">@(String.Format("{0:0,0}", item.BookUnitPrice))đ</div>
+
                     </div>
                 </div>
             </div>
@@ -152,7 +171,7 @@
                         </div>
                     </span>
                     <div class="cart__product-pay-total-right-all">Tổng số tiền: </div>
-                    <div class="cart__product-pay-total-right-price">@item.TotalPriceBook đ</div>
+                    <div class="cart__product-pay-total-right-price">@(String.Format("{0:0,0}", item.TotalPriceBook))đ</div>
                 </div>
             </div>
 
@@ -165,7 +184,7 @@
                         </div> -->
                     </div>
                     <button class="checkout__order-stardust-button appreciate-btn">Đánh giá</button>
-                    <button class="checkout__order-stardust-button buy-again-btn">Mua lại</button>
+                    <button onclick="location.href='@Url.Action("Detail", "Books", new { id = item.Book_id })'" class="checkout__order-stardust-button buy-again-btn">Mua lại</button>
                 </div>
             </div>
 

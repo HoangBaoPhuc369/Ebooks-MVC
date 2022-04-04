@@ -39,7 +39,7 @@ namespace Ebooks.Areas.Admin.Controllers
                 {
                     ViewBag.Notification = "Chúc mừng bạn đăng nhập thành công";
                     Session["username"] = ct;
-                    return RedirectToAction("ListBook", "Book");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

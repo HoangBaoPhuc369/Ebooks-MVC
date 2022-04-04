@@ -32,6 +32,26 @@ namespace Ebooks.Models
             return View(all_sach.ToPagedList(pageNum, pageSize));
         }
 
+        public ActionResult Home(int? page)
+        {
+            if (page == null) page = 1;
+            var all_sach = (from s in data.Books select s).OrderBy(m => m.id);
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
+            ViewBag.ListCategory = query;
+            ViewBag.BookSold = booksold;
+            return View(all_sach.ToPagedList(pageNum, pageSize));
+        }
+
         [HttpPost]
         public ActionResult Index(int? page, string search)
         {
@@ -196,6 +216,54 @@ namespace Ebooks.Models
         //    ViewBag.BookInSale = booksale;
         //    return View(all_sach.ToPagedList(pageNum, pageSize));
         //}
+
+        public ActionResult PriceUp(int? page)
+        {
+            if (page == null) page = 1;
+            var all_sach = (from s in data.Books select s).OrderBy(m => m.id);
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            var query1 = from b in data.Books
+                         orderby b.price descending
+                         select b;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
+            ViewBag.BookSold = booksold;
+            ViewBag.PriceUp = query1;
+            ViewBag.ListCategory = query;
+            return View(all_sach.ToPagedList(pageNum, pageSize));
+        }
+
+        public ActionResult PriceDown(int? page)
+        {
+            if (page == null) page = 1;
+            var all_sach = (from s in data.Books select s).OrderBy(m => m.id);
+            int pageSize = 15;
+            int pageNum = page ?? 1;
+            var query = from c in data.categories select c;
+            var query1 = from b in data.Books
+                         orderby b.price ascending
+                         select b;
+            var booksold = from b in data.Books
+                           join ol in data.order_lists on b.id equals ol.id_book
+                           group new { b, ol } by new { b.id } into g
+                           select new BookSold
+                           {
+                               Book_id = g.Key.id,
+                               Book_qty_sold = g.Sum(n => Convert.ToInt32(n.ol.amount))
+                           };
+            ViewBag.BookSold = booksold;
+            ViewBag.PriceDown = query1;
+            ViewBag.ListCategory = query;
+            return View(all_sach.ToPagedList(pageNum, pageSize));
+        }
 
     }
 }

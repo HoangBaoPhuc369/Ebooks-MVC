@@ -39,6 +39,7 @@ namespace Ebooks.Areas.Admin.Controllers
             var E_tenloai = Convert.ToInt32(collection["category_id"]);
             var E_tensach = collection["title"];
             var E_giaban = Convert.ToDouble(collection["price"]);
+            var E_date = DateTime.Now;
             var E_soluongton = Convert.ToInt32(collection["qty"]);
             var E_hinh = collection["image_path"];
             if (string.IsNullOrEmpty(E_tensach))
@@ -48,6 +49,7 @@ namespace Ebooks.Areas.Admin.Controllers
             else
             {
                 s.category_id = E_tenloai;
+                s.date_create = E_date;
                 s.title = E_tensach.ToString();
                 s.price = E_giaban;
                 s.qty = E_soluongton;

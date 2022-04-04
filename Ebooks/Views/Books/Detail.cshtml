@@ -5,6 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Search {
+    @using (Html.BeginForm("Index", "Books", "", FormMethod.Post, new { @class = "form-search-heading" }))
+    {
+        <div class="header__search-input-wrap">
+            <input type="text" name="search" id="search" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+            @*<div class="header__search-history">
+                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                    <ul class="header__search-history-list">
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                    </ul>
+                </div>*@
+        </div>
+        <div class="header__search-select">
+            <span class="header__search-select-label">Trong shop</span>
+
+            <i class="header__search-select-icon fas fa-angle-down"></i>
+
+            <ul class="header__search-option">
+                <li class="header__search-option-item">
+                    <span>Trong shop</span>
+                    <i class="fas fa-check"></i>
+                </li>
+            </ul>
+        </div>
+        <button class="header__search-btn" type="submit">
+            <i class="header__search-btn-icon fas fa-search"></i>
+        </button>
+    }
+
+}
+
 <div class="main__view-books">
     <div class="container-fluid grid wide">
         <div class="row sm-gutter background-white">
@@ -109,7 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div  class="product-btn-buy-now">
+                        <div class="product-btn-buy-now">
                             <div class="product-btn-buy-content">
                                 <div class="btn-t-2 btn-add-2-cart btn-block d-flex" id="">
                                     <input type="submit" name="buynow" value="Mua ngay" class="btn-buy-now">

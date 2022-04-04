@@ -214,13 +214,15 @@ namespace Ebooks.Controllers
                          join ca in data.categories on b.category_id equals ca.id
                          where o.id_customer == kh.id
                          select new CustomerOrder 
-                         { 
+                         {
+                             Book_id = b.id,
                              BookImage = b.image_path,
                              BookName = b.title,
                              BookAmount = (int)ol.amount,
                              BookCate = ca.name,
                              BookUnitPrice = (double)b.price,
-                             TotalPriceBook = (double)ol.unit_price
+                             TotalPriceBook = (double)ol.unit_price,
+                             Book_order_status = Convert.ToByte(o.status),
                          };
             ViewBag.OrderCustomer = query;
             return View();
@@ -312,7 +314,7 @@ namespace Ebooks.Controllers
             string partnerCode = "MOMO7EVQ20220329";
             string accessKey = "2UlpvafBHM2XkWkD";
             string serectkey = "2NcYVTZQjNjZ62VnxQlDPApmsUwpS6u0";
-            string orderInfo = "test";
+            string orderInfo = "Thanh Toán Sách";
             string returnUrl = "https://localhost:44358/Cart/OrderMoMo";
             string notifyurl = " http://c40f-2405-4802-91b8-6d70-ccca-2655-a56d-e6f5.ngrok.io/Cart/Order"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 

@@ -1,0 +1,190 @@
+﻿@model Ebooks.Models.customer
+
+@{
+    ViewBag.Title = "CustomerInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Search {
+    @using (Html.BeginForm("Index", "Books", "", FormMethod.Post, new { @class = "form-search-heading" }))
+    {
+        <div class="header__search-input-wrap">
+            <input type="text" name="search" id="search" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+            @*<div class="header__search-history">
+                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                    <ul class="header__search-history-list">
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                    </ul>
+                </div>*@
+        </div>
+        <div class="header__search-select">
+            <span class="header__search-select-label">Trong shop</span>
+
+            <i class="header__search-select-icon fas fa-angle-down"></i>
+
+            <ul class="header__search-option">
+                <li class="header__search-option-item">
+                    <span>Trong shop</span>
+                    <i class="fas fa-check"></i>
+                </li>
+            </ul>
+        </div>
+        <button class="header__search-btn" type="submit">
+            <i class="header__search-btn-icon fas fa-search"></i>
+        </button>
+    }
+
+}
+@section product_order {
+    <link href="~/Asset/client/product order/cart.css" rel="stylesheet" />
+    <link href="~/Asset/client/product order/product_order.css" rel="stylesheet" />
+}
+<div class="col l-2 m-0 c-0">
+    <nav class="">
+        @using Ebooks.Models
+        @{
+            customer ct = (customer)Session["username"];
+        }
+        @{
+            if (Session["username"] != null)
+            {
+                <div class="sidebar-user">
+                    <img src="@ct.image_path" alt="" class="sidebar-user-img">
+                    <div class="sidebar-user-name">
+                        <div class="sidebar_user_name">
+                            @ct.username
+                        </div>
+                        <a href="#" class="sidebar-link-user">
+                            <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;"><path d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48" fill="#9B9B9B" fill-rule="evenodd"></path></svg>
+                            Sửa Hồ Sơ
+                        </a>
+                    </div>
+                </div>
+
+            }
+        }
+    </nav>
+</div>
+
+<div class="col l-10 m-12 c-12">
+    <div class="customer-order" style="margin-bottom: 10px; padding: 10px 30px; background: #fff;">
+        <div class="list-product">
+            <div class="product-favorite">
+
+                <div class="product-favorite--heading">
+                    <div class="product-favorite-content">
+                        <p>Hồ sơ của tôi</p>
+                    </div>
+
+                    <div class="user-info-heading">
+                        Quản Lý Thông Tin Để Bảo Mật Hồ Sơ
+                    </div>
+                </div>
+
+                <div class="cart__product-status">
+                </div>
+            </div>
+
+            <div class="list-product--line"></div>
+
+            @using (Html.BeginForm())
+            {
+                <div class="product-main-user">
+
+                    <div class="auth-form__form-user">
+
+                        <div class="auth-form__group">
+                            <span class="auth-form__group-text">Tên đăng nhập</span>
+                            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @name = "Username", @type = "text", @class = "auth-form__input-user" } })
+                        </div>
+
+                        <div class="auth-form__group">
+                            <span class="auth-form__group-text" style="margin-left: 53px;">Họ tên</span>
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @name = "Name", @type = "text", @class = "auth-form__input-user" } })
+                        </div>
+
+                        <div class="auth-form__group">
+                            <span class="auth-form__group-text" style="margin-left: 12px;">Số điện thoại</span>
+                            @Html.EditorFor(model => model.contact, new { htmlAttributes = new { @name = "Contact", @type = "text", @class = "auth-form__input-user" } })
+                        </div>
+
+                        <div class="auth-form__group">
+                            <span class="auth-form__group-text" style="margin-left: 65px;">Email</span>
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @name = "Email", @type = "text", @class = "auth-form__input-user" } })
+                        </div>
+
+                        <div class="auth-form__group" style="position: relative;">
+                            <span class="auth-form__group-text" style="margin-left: 54px; margin-left: 54px; position: absolute; top: 26px; left: -66px; ">Địa chỉ</span>
+                            <textarea type="text" name="Address" class="auth-form__input-user auth-form__input-user-address">@Html.DisplayFor(model => model.address)</textarea>
+                        </div>
+                    </div>
+
+                    <div class="user-upload-img">
+                        <div class="user-upload-contain" style="text-align:center;">
+                            <img src="@Html.DisplayFor(model => model.image_path)" id="pictureUpload" class="user-img">
+                            @*<img src="fileUpload" id="pictureUpload" class="user-img">*@
+                            <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none" />
+                            <input type="text" name="image_path" id="image_path" style="display:none" />
+                            <input type="button" id="btnUpload" value="Chọn Ảnh" class="checkout__order-stardust-button buy-again-btn" />
+                        </div>
+                    </div>
+
+                    @*<span class="details">Image</span>
+                        <input type="file" name="fileUpload" id="fileUpload" accept="image/*" />
+                        <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
+                        <img src="fileUpload" id="pictureUpload" />*@
+                </div>
+
+                <div class="checkout__user mg-bt-0">
+                    <div class="checkout__order-user">
+                        <button class="checkout__order-stardust-button appreciate-btn">Lưu</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section upload
+{
+    <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/Book/ProcessUpload',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlImage) {
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#image_path').val(urlImage);
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+    </script>
+}
+

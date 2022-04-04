@@ -20,7 +20,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="@Url.Action("Index", "Home")">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -66,7 +66,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">Quản lý đơn hàng</a>
+                <a class="collapse-item" href="@Url.Action("Orders", "Order")">Quản lý đơn hàng</a>
                 <a class="collapse-item" href="utilities-border.html">Quản lý doanh thu</a>
             </div>
         </div>
@@ -94,7 +94,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("MangeCustomer", "CustomerMange")">Khách hàng</a>
                         <a class="collapse-item" href="@Url.Action("MangeUser", "User")">Nhân viên</a>
                     </div>
                 </div>

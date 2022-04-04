@@ -498,8 +498,9 @@
 .header__logo-link {
     text-decoration: none;
     color: transparent;
-    display: block;
+    display: flex;
     line-height: 0;
+    justify-content: center;
 }
 
 .header__logo-img {

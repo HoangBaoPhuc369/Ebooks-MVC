@@ -55,6 +55,7 @@ namespace Ebooks.Controllers
                 ct.username = user;
                 ct.password = password;
                 ct.email = email;
+                ct.image_path = "~/Content/no_pic.jpg";
                 data.customers.InsertOnSubmit(ct);
                 data.SubmitChanges();
                 return RedirectToAction("Login");
@@ -107,7 +108,45 @@ namespace Ebooks.Controllers
             return RedirectToAction("Index", "Books");
         }
 
-       
+
+        public ActionResult CustomerInfo(int id)
+        {
+            var E_user = data.customers.First(m => m.id == id);
+            return View(E_user);
+        }
+
+        [HttpPost]
+        public ActionResult CustomerInfo(int id, FormCollection collection)
+        {
+            var E_user = data.customers.First(m => m.id == id);
+            var E_tendn = collection["Username"];
+            var e_hinh = collection["image_path"];
+            var E_ten = collection["Name"];
+            var E_email = collection["Email"];
+            var E_diachi = collection["Address"];
+            var Esdt = collection["Contact"];
+            E_user.id = id;
+            if (string.IsNullOrEmpty(E_tendn))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                E_user.username = E_tendn;
+                E_user.image_path = E_tendn;
+                E_user.name = E_ten;
+                E_user.email = E_email;
+                E_user.address = E_diachi;
+                E_user.contact = Esdt;
+                Session["username"] = E_user;
+                UpdateModel(E_user);
+                data.SubmitChanges();
+                return this.CustomerInfo(id);
+            }
+            return this.CustomerInfo(id);
+        }
+        //-----------------------------------------
+
 
     }
 }

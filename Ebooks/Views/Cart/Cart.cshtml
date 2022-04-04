@@ -9,6 +9,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 }
 
+@section Search {
+    @using (Html.BeginForm("Index", "Books", "", FormMethod.Post, new { @class = "form-search-heading" }))
+    {
+        <div class="header__search-input-wrap">
+            <input type="text" name="search" id="search" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+            @*<div class="header__search-history">
+                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                    <ul class="header__search-history-list">
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                        <li class="header__search-history-item">
+                            <a href=""></a>
+                        </li>
+
+                    </ul>
+                </div>*@
+        </div>
+        <div class="header__search-select">
+            <span class="header__search-select-label">Trong shop</span>
+
+            <i class="header__search-select-icon fas fa-angle-down"></i>
+
+            <ul class="header__search-option">
+                <li class="header__search-option-item">
+                    <span>Trong shop</span>
+                    <i class="fas fa-check"></i>
+                </li>
+            </ul>
+        </div>
+        <button class="header__search-btn" type="submit">
+            <i class="header__search-btn-icon fas fa-search"></i>
+        </button>
+    }
+
+}
+
 <div class="main-field__cart">
     <div class="cart__bill--header" id="header__cart">
         <div class="cart__bill-left">
@@ -71,16 +110,6 @@
                                             <button type="submit" id="sub" class="product__amount-main-minus sub btn-minus format-btn">-</button>
                                             <input type="text" min="1" name="txtSoLg" id="txtQuantity" value="@item.qty" class="product__amount-main-input-content form-control-sm qty-input">
                                             <button type="submit" id="add" class="product__amount-main-plus btn-plus add format-btn-plus">+</button>
-
-                                            @*<input type="submit" id="sub" onclick="changeQuantity('minus');" class="product__amount-main-minus sub format-btn btn-minus" value="-">
-                                                <input min="1" name="txtSoLg" id="" class="product__amount-main-input-content form-control-sm qty-input" value="@item.qty">
-                                                <input type="submit" onclick="changeQuantity('plus');" id="minus-btn" class="product__amount-main-plus format-btn btn-plus" value="+">
-
-                                                <b><svg class="svg-inline--fa fa-plus fa-pluss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg></b>
-                                                <svg class="svg-inline--fa fa-minus fa-minuss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
-
-                                            *@
-
                                         </div>
                                     </div>
                                     <div class="l-3">

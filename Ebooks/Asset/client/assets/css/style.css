@@ -417,6 +417,12 @@ textarea {
         background-color: #fafafa;
     }
 
+    .header__navbar-user-item:hover a{
+        color: rgb(35, 209, 186);
+        text-decoration: none;
+        background-color: #fafafa;
+    }
+
 .header__navbar-user-menu {
     padding: 0;
     margin: 0;
